@@ -5,10 +5,10 @@ import (
 	"os"
 )
 
-func MustEnv(s string) string {
-	result := os.Getenv(s)
-	if result == "" {
-		panic(fmt.Sprintf("No env variable for %s", s))
+func MustGetenv(key string) (string, error) {
+	val := os.Getenv(key)
+	if val == "" {
+		return "", fmt.Errorf("failed to get env '%s'", key)
 	}
-	return result
+	return val, nil
 }
